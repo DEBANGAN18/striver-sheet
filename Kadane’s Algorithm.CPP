@@ -19,3 +19,6 @@ public:
         return max_sum;
     }
 };
+
+// T.C: O(N) --> TRAVERSING THE ARRAY ONCE
+//S.C : O(1) --> CONSTATNT SPACE
