@@ -13,7 +13,7 @@ traverse the array:
       if yes then calculate the length by getting the max of (i - m[x]) --> i is the current index and m[x] is the index sum of the x part of the array
       if no then push the sum in the array with val as the index
 */
-
+// since here k = 0 so x = sum thats why taken sum directly without using another name x
 
 class Solution{
     public:
