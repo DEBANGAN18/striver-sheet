@@ -27,3 +27,69 @@ public:
 };
 
 //optimised appproach: using merge sort where the merging conditon has a logic to select the pairs
+
+class Solution {
+public:
+   
+    int merge(vector<int>& nums, int s,int m, int e){
+        int count =0;
+        int secondhalf = m+1;
+     
+        //counting the pairs
+        for(int firsthalf = s; firsthalf <= m;  firsthalf++){
+            while(secondhalf<=e and nums[firsthalf] >2* (long long) nums[secondhalf]){
+                secondhalf++;
+            }
+             count += (secondhalf - (m + 1));
+        }
+        
+        //sorting the subparts like merge sort functionality
+        int i=s,j=m+1;
+        vector<int>temp;
+        while(i<=m and j<=e){
+            if(nums[i]> nums[j]){
+                temp.push_back(nums[j]);
+                j++;
+            }
+            else{
+                temp.push_back(nums[i]);
+                i++;
+            }
+        }
+        while(j<=e) temp.push_back(nums[j++]);
+        while(i<=m) temp.push_back(nums[i++]);
+        
+        //copying the sorted array back to nums
+        int k=0;
+        for(int i=s;i<=e;i++){
+            nums[i]=temp[k++];
+        }
+        return count;
+    }
+    int mergeS(vector<int>& nums, int s, int e){
+        //base case
+        if(s>=e) return 0;
+         
+        //recursion
+        int mid = (s+e)/2;
+        
+        //mergesort on first half
+        int count = mergeS(nums,s,mid);
+        
+        //mergesort on second half    
+        count+= mergeS(nums,mid+1,e);
+        
+        //merge the sub-parts
+        count+= merge(nums,s,mid,e);
+        
+         return count;
+    }
+    
+    int reversePairs(vector<int>& nums) {
+       
+        int s=0,e=nums.size()-1;
+        return mergeS(nums,s,e); 
+    }
+};
+//T.C: O(N LOG N) {FOR MERGE SORT } + O(N) {COUNTING PAIRS} + O(N){MERGING THE SUB PARTS}
+//S.C: O(N) --> USING TEMP ARRAY
