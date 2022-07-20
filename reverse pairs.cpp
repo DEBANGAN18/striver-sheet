@@ -27,6 +27,8 @@ public:
 };
 
 //optimised appproach: using merge sort where the merging conditon has a logic to select the pairs
+//approach is same as implementation of merge sort only the counting portion is added extra where the counting of pairs is done before merging the sub-parts and are 
+//added to the count var in mergeS() function.
 
 class Solution {
 public:
@@ -40,6 +42,8 @@ public:
             while(secondhalf<=e and nums[firsthalf] >2* (long long) nums[secondhalf]){
                 secondhalf++;
             }
+            // say in the second half of the array there are [2,4,6,8] and secondhalf is pointing to 6 that means--> 2 and 4 should be involved for counting as pairs
+            //that means. we count the left elements of secondhalf. (second part of the array starts from m+1) 
              count += (secondhalf - (m + 1));
         }
         
